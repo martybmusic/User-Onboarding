@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import ReactDom from 'react-dom';
+// import ReactDom from 'react-dom';
 import axios from 'axios';
 import './App.css';
 import Form from './components/Form';
@@ -47,25 +47,46 @@ function App() {
     .finally(() => {setFormValues(initialFormValues)})
   }
 
-  const validation = (name, value) => {
-    
+  const validate = (name, value) => {
+    yup.reach(schema, name)
+      .validate(value)
+      .then(() => setFormErrors({...formErrors, [name]: ''}))
+      .catch(error => setFormErrors({...formErrors, [name]: error.errors[0]}))
   }
+
+  const inputChange = (name, value) => {
+    validate(name, value)
+    setFormValues({...formValues, [name]: value})
+  }
+
+  const submitForm = () => {
+    const newUser = {
+      name: formValues.name(),
+      email: formValues.email(),
+      password: formValues.password(),
+      terms: formValues.terms,
+    }
+    postNewUser(newUser)
+  }
+
+  useEffect(() => {
+    schema.isValid(formValues)
+    .then(valid => setDisabledState(!valid))
+  }, [formValues])
+
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <h2>Submit User Data</h2>
       </header>
+      <Form
+        values={formValues}
+        change={inputChange}
+        submit={submitForm}
+        disabled={disabledState}
+        errors={formErrors}
+      />
+
     </div>
   );
 }

@@ -1,7 +1,7 @@
 import React from 'react';
 
 function Form (props) {
-    const { values, submit, change, disabled, errors } = props
+    const { values, submit, change, disabled, errors, } = props
 
     const onSubmit = event => {
         event.preventDefault()
@@ -16,10 +16,10 @@ function Form (props) {
     }
 
     return (
-        <Form onSubmit={onSubmit}>
+        <form onSubmit={onSubmit}>
             <div>
                 <h3>Create Username</h3>
-                <button id='buttonSubmit' disabled={disabled}>SUBMIT</button>
+                <button id='button' disabled={disabled}>Submit</button>
                 <div>
                     <div>{errors.name}</div>
                     <div>{errors.email}</div>
@@ -45,7 +45,7 @@ function Form (props) {
                     <input value={values.terms} onChange={onChange} name='terms' type='checkbox' />
                 </label>
             </div>
-        </Form>
+        </form>
     )
 }
 
