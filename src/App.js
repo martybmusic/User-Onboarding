@@ -38,7 +38,18 @@ function App() {
       .catch(error => {console.log(error)})
   }
 
-  
+  const postNewUser = newUser => {
+    axios.post('https://reqres.in/api/users', newUser)
+    .then(result => {
+      setUser([result.data, ...user])
+    })
+    .catch(error => {console.log(error)})
+    .finally(() => {setFormValues(initialFormValues)})
+  }
+
+  const validation = (name, value) => {
+    
+  }
   return (
     <div className="App">
       <header className="App-header">
