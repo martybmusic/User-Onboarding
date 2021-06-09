@@ -76,7 +76,7 @@ function App() {
 
   return (
     <div className="App">
-      <header className="App-header">
+      <header>
         <h2>Submit User Data</h2>
       </header>
       <Form
