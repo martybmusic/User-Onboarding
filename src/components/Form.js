@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function Form (props) {
+function Form (props) {
     const { values, submit, change, disabled, errors } = props
 
     const onSubmit = event => {
@@ -21,9 +21,32 @@ export default function Form (props) {
                 <h3>Create Username</h3>
                 <button id='buttonSubmit' disabled={disabled}>SUBMIT</button>
                 <div>
-                    <div></div>
+                    <div>{errors.name}</div>
+                    <div>{errors.email}</div>
+                    <div>{errors.password}</div>
+                    <div>{errors.terms}</div>
                 </div>
+            </div>
+
+            <div>
+                <label>Name
+                    <input value={values.name} onChange={onChange} name='name' type='text' />
+                </label>
+                
+                <label>Email
+                    <input value={values.email} onChange={onChange} name='email' type='text' />
+                </label>
+
+                <label>Password
+                    <input value={values.password} onChange={onChange} name='password' type='text' />
+                </label>
+
+                <label>Terms of Service
+                    <input value={values.terms} onChange={onChange} name='terms' type='checkbox' />
+                </label>
             </div>
         </Form>
     )
 }
+
+export default Form
