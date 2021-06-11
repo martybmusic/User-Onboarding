@@ -12,15 +12,37 @@ describe('User Data Form', () => {
     })
 
     const nameField = () => cy.get('input[name="name"]')
+    const emailField = () => cy.get('input[name="email"]')
+    const passField = () => cy.get('input[name="password"]')
+    const checkBox = () => cy.get('input[name="terms"]')
 
 
-    it('typable field', () => {
+    it('typable name field', () => {
         nameField()
             .should("have.value", "")
             .type("Neo Anderson")
             .should("have.value", "Neo Anderson")
     })
 
+    it('typable email field', () => {
+        emailField()
+            .should("have.value", "")
+            .type("neo.anderson@google.com")
+            .should("have.value", "neo.anderson@google.com")
+    })
+
+    it('typable password field', () => {
+        passField()
+            .should("have.value", "")
+            .type("password123")
+            .should("have.value", "password123")
+    })
+
+    it('checkable box', () => {
+        checkBox()
+            .check()
+            .uncheck()
+    })
 
 
 })
