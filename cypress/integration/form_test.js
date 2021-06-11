@@ -55,5 +55,13 @@ describe('User Data Form', () => {
             submitButton().should("not.be.disabled")
     })
 
+    it('not submittable with an empty field', () => {
+        submitButton()
+            .should("be.disabled")
+            nameField().type("Neo Anderson")
+            checkBox().check()
+            submitButton().should("be.disabled")
+    })
+
 
 })
