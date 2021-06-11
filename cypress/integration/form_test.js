@@ -15,6 +15,7 @@ describe('User Data Form', () => {
     const emailField = () => cy.get('input[name="email"]')
     const passField = () => cy.get('input[name="password"]')
     const checkBox = () => cy.get('input[name="terms"]')
+    const submitButton = () => cy.get('button[id="button"]')
 
 
     it('typable name field', () => {
@@ -42,6 +43,16 @@ describe('User Data Form', () => {
         checkBox()
             .check()
             .uncheck()
+    })
+
+    it('submittable form once completed', () => {
+        submitButton()
+            .should("be.disabled")
+            nameField().type("Neo Anderson")
+            emailField().type("neo.anderson@google.com")
+            passField().type("password123")
+            checkBox().check()
+            submitButton().should("not.be.disabled")
     })
 
 
